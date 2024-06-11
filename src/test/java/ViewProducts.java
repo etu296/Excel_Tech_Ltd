@@ -51,5 +51,26 @@ public class ViewProducts extends BaseClass{
         Thread.sleep(1000);
 
     }
+    @Test(priority = 2, description = "set price range with the slider")
+    public void setPriceRange() throws  Exception{
+    driver.get("https://www.excelbd.com/product-category/wi-fi-networking/router/wireless-n-router/mercusys-wireless-n-router/");
+    WebElement leftSlider = driver.findElement(By.xpath("//*[@id=\"wpfSliderRange\"]/span[1]"));
+    WebElement rightSlider = driver.findElement(By.xpath("//*[@id=\"wpfSliderRange\"]/span[2]"));
 
-}
+        // Initialize Actions class
+        Actions actions = new Actions(driver);
+
+        // Move the left slider to the desired position
+        moveSlider(actions, leftSlider, 50);
+
+        // Move the right slider to the desired position
+        moveSlider(actions, rightSlider, -50);
+    }
+
+    private void moveSlider(Actions actions, WebElement slider, int xOffset) {
+        actions.clickAndHold(slider).moveByOffset(xOffset, 0).release().perform();
+    }
+
+    }
+
+
